@@ -15,18 +15,19 @@ import java.util.logging.Logger;
 public class DBSample {
     private static Connection getConnection() throws SQLException{
         try {
-            Class.forName("com.mysql.jbdc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBSample.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
         String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+        String name = "dbsample";
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + name;
         String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
         String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
-        String name = "dbsample";
-        String url = "jbdc:mysql://" + host + ":" + port + "/" + name;
-        return DriverManager.getConnection(url, username, password);
+        Connection con = DriverManager.getConnection(url, username, password);
+        return con;
         
     }
     public static String getTable(){
