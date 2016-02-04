@@ -13,6 +13,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%DBSample.getTable()%>
+        <%=DBSample.getTable()%>
     </body>
 </html>
